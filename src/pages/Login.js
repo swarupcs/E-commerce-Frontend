@@ -6,6 +6,30 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [data, setData] = useState({
+    email : "",
+    password: ""
+  })
+
+  const handleOnChange = (e) => {
+
+    const { name, value } = e.target;
+
+    setData((prev) => {
+      return{
+        ...prev,
+        [name]: value
+      }
+    })
+
+  }
+
+  // console.log(data)
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <section id="login">
       <div className="mx-auto container p-4">
@@ -14,13 +38,16 @@ const Login = () => {
             <img src={loginIcons} alt="login icons" />
           </div>
 
-          <form className="pt-6">
+          <form className="pt-6" onSubmit={handleSubmit}>
             <div className="grid">
               <label>Email : </label>
               <div className="bg-slate-100 p-2">
                 <input
                   type="email"
                   placeholder="enter email"
+                  name="email"
+                  value={data.email}
+                  onChange={handleOnChange}
                   className="w-full h-full outline-none bg-transparent"
                 />
               </div>
@@ -31,6 +58,9 @@ const Login = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="enter password"
+                  name="password"
+                  value={data.password}
+                  onChange={handleOnChange}
                   className="w-full h-full outline-none bg-transparent"
                 />
                 <div className="cursor-pointer text-xl" onClick={()=> setShowPassword((prev)=> !prev)}>
