@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import imageTobase64 from "../helpers/imageTobase64";
+import SummaryApi from "../common";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,7 +30,7 @@ const SignUp = () => {
 
   }
 
-  // console.log(data)
+  console.log(data)
 
   const handleUploadPic = async (e) => {
     const file = e.target.files[0];
@@ -44,9 +45,32 @@ const SignUp = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(data.password === data.confirmPassword) {
+      // console.log("SummaryApi.signUp.url", SummaryApi.signUp.url)
+      const dataResponse = await fetch(SummaryApi.signUp.url, {
+        method: SummaryApi.signUp.method,
+        headers: {
+          "content-type" : "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+  
+      const dataApi = await dataResponse.json()
+  
+      console.log("data", dataApi)
+    } else {
+      console.log("Please check password and confirm password")
+    }
+
+
+
+
   }
+
+
   return (
     <section id="login">
       <div className="mx-auto container p-4">
@@ -72,7 +96,7 @@ const SignUp = () => {
               <div className="bg-slate-100 p-2">
                 <input
                   type="text"
-                  placeholder="enter email"
+                  placeholder="enter your name"
                   name="name"
                   value={data.name}
                   onChange={handleOnChange}
