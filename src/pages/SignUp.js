@@ -5,6 +5,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import imageTobase64 from "../helpers/imageTobase64";
 import SummaryApi from "../common";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +17,8 @@ const SignUp = () => {
     confirmPassword: "",
     profilePic: "",
   })
+
+  
 
   const handleOnChange = (e) => {
 
@@ -30,7 +33,7 @@ const SignUp = () => {
 
   }
 
-  console.log(data)
+  // console.log(data)
 
   const handleUploadPic = async (e) => {
     const file = e.target.files[0];
@@ -59,8 +62,18 @@ const SignUp = () => {
       })
   
       const dataApi = await dataResponse.json()
+
+      if(dataApi.success) {
+        toast.success(dataApi.message)
+      }
+    
+      if(dataApi.error) {
+        toast.error(dataApi.message)
+      }
+
+      // toast(dataApi.message)
   
-      console.log("data", dataApi)
+      // console.log("data", dataApi)
     } else {
       console.log("Please check password and confirm password")
     }
