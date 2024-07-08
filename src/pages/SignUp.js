@@ -37,8 +37,13 @@ const SignUp = () => {
     <section id="login">
       <div className="mx-auto container p-4">
         <div className="bg-white p-5 w-full max-w-sm mx-auto">
-          <div className="w-20 h-20 mx-auto">
-            <img src={loginIcons} alt="login icons" />
+          <div className="w-20 h-20 mx-auto relative overflow-hidden rounded-full">
+            <div>
+              <img src={loginIcons} alt="login icons" />
+            </div>
+            <div className="text-xs bg-opacity-80 bg-slate-200 pb-4 pt-2 cursor-pointer text-center absolute bottom-0 w-full">
+              Upload Photo
+            </div>
           </div>
 
           <form className="pt-6 flex flex-col gap-2" onSubmit={handleSubmit}>
