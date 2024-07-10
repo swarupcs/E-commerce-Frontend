@@ -3,6 +3,7 @@ import SummaryApi from '../common'
 import { toast } from 'react-toastify'
 import moment from 'moment';
 import { MdModeEdit } from "react-icons/md"
+import ChangeUserRole from '../components/ChangeUserRole';
 
 const AllUsers = () => {
   const [allUser, setAllUsers] = useState([])
@@ -69,6 +70,8 @@ const AllUsers = () => {
           }
         </tbody>
       </table>
+
+      <ChangeUserRole />
     </div>
   )
 }
