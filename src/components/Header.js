@@ -36,7 +36,7 @@ const Header = () => {
   }
 
   return (
-    <header className="h-16 shadow-md bg-white">
+    <header className="h-16 shadow-md bg-white fixed w-full z-40">
       <div className="h-full container mx-auto flex items-center px-4 justify-between">
         <div className="">
           <Link to={"/"}>
@@ -69,7 +69,7 @@ const Header = () => {
               menuDisplay && (
                 <div className="absolute bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded">
                 <nav>
-                  <Link to={"admin-panel"} className="whitespace-nowrap hover:bg-slate-100 p-2">Admin Panl</Link>
+                  <Link to={"admin-panel"} className="whitespace-nowrap hover:bg-slate-100 p-2 onClick={()=>setMenuDisplay((prev) => !prev)}">Admin Panl</Link>
                 </nav>
             </div>
               )
