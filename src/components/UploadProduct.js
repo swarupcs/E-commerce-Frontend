@@ -4,6 +4,7 @@ import productCategory from "../helpers/productCategory";
 import { FaCloudUploadAlt} from "react-icons/fa";
 import uploadImage from "../helpers/uploadImage";
 import DisplayImage from "./DisplayImage";
+import { MdDelete } from "react-icons/md";
 
 const UploadProduct = ({
   onClose,
@@ -45,6 +46,21 @@ const UploadProduct = ({
     })
 
     // console.log("upload Image", uploadImageCloudinary.url);
+  }
+
+  const handleDeleteProductImage = async(index) => {
+    console.log("Index of Image", index);
+
+    const newProductImage = [...data.productImage]
+    newProductImage.splice(index, 1)
+
+    setData((prev) => {
+      return{
+        ...prev,
+        productImage: [...newProductImage]
+      }
+    })
+
   }
 
   return (
@@ -110,19 +126,27 @@ const UploadProduct = ({
             data?.productImage[0] ? (
               <div className="flex items-center gap-2">
                 {
-                   data.productImage.map(el=> {
+                   data.productImage.map((el, index)=> {
                     return(
-                      <img 
-                      src={el} 
-                      alt={el}
-                      width={80} 
-                      height={80} 
-                      className="bg-slate-100 border cursor-pointer"
-                      onClick={()=>{
-                        setOpenFullScreenImage(true)
-                        setFullScreenImage(el)
-                      }}
-                      />
+                      <div className="relative group">
+                        <img 
+                        src={el} 
+                        alt={el}
+                        width={80} 
+                        height={80} 
+                        className="bg-slate-100 border cursor-pointer"
+                        onClick={()=>{
+                          setOpenFullScreenImage(true)
+                          setFullScreenImage(el)
+                        }}
+                        />
+
+                          <div className="absolute bottom-0 right-0 p-1 text-white bg-red-600 rounded-full hidden group-hover:block cursor-pointer" onClick={()=>handleDeleteProductImage(index)}>
+                            <MdDelete />
+                          </div>
+                      </div>
+
+
                       
                     )
                   })
@@ -143,7 +167,11 @@ const UploadProduct = ({
       </div>
 
       {/* display image full screen */}
-      <DisplayImage onClose={()=>setOpenFullScreenImage(false)} imgUrl={fullScreenImage}/>
+      {
+        openFullScreenImage && (
+          <DisplayImage onClose={()=>setOpenFullScreenImage(false)} imgUrl={fullScreenImage}/>
+        )
+       }
     </div>
   );
 };
