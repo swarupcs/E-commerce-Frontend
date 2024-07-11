@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import productCategory from "../helpers/productCategory";
 import { FaCloudUploadAlt} from "react-icons/fa";
+import uploadImage from "../helpers/uploadImage";
 
 const UploadProduct = ({
   onClose,
@@ -24,10 +25,21 @@ const UploadProduct = ({
 
   }
 
-  const handleUploadProduct = (e) => {
+  const handleUploadProduct = async (e) => {
     const file = e.target.files[0];
     setUploadProductImageInput(file.name);
     console.log("file", file)
+
+    const uploadImageCloudinary = await uploadImage(file)
+
+    setData((prev) => {
+      return{
+        ...prev,
+        productImage: [...prev.productImage, uploadImageCloudinary.url]
+      }
+    })
+
+    console.log("upload Image", uploadImageCloudinary.url);
   }
 
   return (
@@ -89,8 +101,26 @@ const UploadProduct = ({
         </label>
 
         <div>
-          <img src="" alt="" width={80} height={80} className="bg-slate-100 border"/>
+          {
+            data?.productImage[0] ? (
+              <div className="flex items-center gap-2">
+                {
+                   data.productImage.map(el=> {
+                    return(
+                      <img src={el} alt="el" width={80} height={80} className="bg-slate-100 border"/>
+                      
+                    )
+                  })
+                }
+              </div>
+             
+            ) : (
+              <p className="text-red-600 text-xs">*Please upload product image</p>
+            )
+          }
         </div>
+
+        <button className="px-3 py-2 bg-red-600 text-white mb-10 hover:bg-red-700">Upload Product</button>
           
         </form>
         
