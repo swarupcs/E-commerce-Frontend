@@ -3,6 +3,7 @@ import { CgClose } from "react-icons/cg";
 import productCategory from "../helpers/productCategory";
 import { FaCloudUploadAlt} from "react-icons/fa";
 import uploadImage from "../helpers/uploadImage";
+import DisplayImage from "./DisplayImage";
 
 const UploadProduct = ({
   onClose,
@@ -19,7 +20,11 @@ const UploadProduct = ({
 
   })
 
-  const [uploadProductImageInput, setUploadProductImageInput] = useState("");
+  const [openFullScreenImage, setOpenFullScreenImage] = useState(false);
+
+  const [fullScreenImage, setFullScreenImage] = useState("")
+
+  // const [uploadProductImageInput, setUploadProductImageInput] = useState("");
 
   const handleOnChange = (e) => {
 
@@ -27,8 +32,8 @@ const UploadProduct = ({
 
   const handleUploadProduct = async (e) => {
     const file = e.target.files[0];
-    setUploadProductImageInput(file.name);
-    console.log("file", file)
+    // setUploadProductImageInput(file.name);
+    // console.log("file", file)
 
     const uploadImageCloudinary = await uploadImage(file)
 
@@ -39,7 +44,7 @@ const UploadProduct = ({
       }
     })
 
-    console.log("upload Image", uploadImageCloudinary.url);
+    // console.log("upload Image", uploadImageCloudinary.url);
   }
 
   return (
@@ -107,7 +112,17 @@ const UploadProduct = ({
                 {
                    data.productImage.map(el=> {
                     return(
-                      <img src={el} alt="el" width={80} height={80} className="bg-slate-100 border"/>
+                      <img 
+                      src={el} 
+                      alt={el}
+                      width={80} 
+                      height={80} 
+                      className="bg-slate-100 border cursor-pointer"
+                      onClick={()=>{
+                        setOpenFullScreenImage(true)
+                        setFullScreenImage(el)
+                      }}
+                      />
                       
                     )
                   })
@@ -126,6 +141,9 @@ const UploadProduct = ({
         
       
       </div>
+
+      {/* display image full screen */}
+      <DisplayImage onClose={()=>setOpenFullScreenImage(false)} imgUrl={fullScreenImage}/>
     </div>
   );
 };
