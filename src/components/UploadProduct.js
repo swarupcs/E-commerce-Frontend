@@ -75,6 +75,7 @@ const UploadProduct = ({
   // Upload Product
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("data", data);
   }
 
   return (
@@ -201,7 +202,13 @@ const UploadProduct = ({
 
           {/* Description */}
           <label htmlFor="description" className="mt-3">Description : </label>
-          <textarea className="h-28 bg-slate-100 border resize-none p-1" placeholder="enter product description">
+          <textarea 
+          className="h-28 bg-slate-100 border resize-none p-1" 
+          placeholder="enter product description" 
+          rows={3} 
+          onChange={handleOnChange}
+          name="description"
+          >
 
           </textarea>
 
