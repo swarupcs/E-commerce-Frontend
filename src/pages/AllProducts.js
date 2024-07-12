@@ -41,7 +41,7 @@ const AllProducts = () => {
       {/* Upload Product Component */}
       {
         openUploadProduct && 
-        (<UploadProduct onClose={()=> setOpenUploadProduct(false)} />)
+        (<UploadProduct onClose={()=> setOpenUploadProduct(false)} fetchData={fetchAllProduct}/>)
       }
       
     </div>
