@@ -8,19 +8,20 @@ import { MdDelete } from "react-icons/md";
 import SummaryApi from "../common";
 import { toast } from 'react-toastify';
 
-const UploadProduct = ({
+const AdminEditProduct = ({
   onClose,
+  productData,
 }) => {
 
   const [data, setData] = useState({
-    productName: "",
-    brandName: "",
-    category: "",
-    productImage: [],
-    description: "",
-    price: "",
-    sellingPrice: "",
-
+    ...productData,
+    productName : productData?.productName,
+    brandName : productData?.brandName,
+    category : productData?.category,
+    productImage : productData?.productImage || [],
+    description : productData?.description,
+    price : productData?.price,
+    sellingPrice : productData?.sellingPrice
   })
 
   const [openFullScreenImage, setOpenFullScreenImage] = useState(false);
@@ -111,7 +112,7 @@ const UploadProduct = ({
        
         <div className="flex justify-between items-center pb-3">
           
-          <h2 className="font-bold text-lg">Upload Product</h2>
+          <h2 className="font-bold text-lg">Edit Product</h2>
           
           <div className="w-fit ml-auto text-2xl hover:text-red-600 cursor-pointer" onClick={onClose}>
             <CgClose />
@@ -261,4 +262,5 @@ const UploadProduct = ({
   );
 };
 
-export default UploadProduct;
+
+export default AdminEditProduct
