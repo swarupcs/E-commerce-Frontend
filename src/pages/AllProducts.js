@@ -32,7 +32,7 @@ const AllProducts = () => {
         {
           allProduct.map((product, index) => {
             return(
-             <AdminProductCard data={product} key={index+"allProduct"} />
+             <AdminProductCard data={product} key={index+"allProduct"} fetchdata={fetchAllProduct}/>
             )
           })
         }
@@ -41,7 +41,7 @@ const AllProducts = () => {
       {/* Upload Product Component */}
       {
         openUploadProduct && 
-        (<UploadProduct onClose={()=> setOpenUploadProduct(false)}/>)
+        (<UploadProduct onClose={()=> setOpenUploadProduct(false)} />)
       }
       
     </div>

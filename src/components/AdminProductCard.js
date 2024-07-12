@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MdModeEditOutline } from "react-icons/md";
 import AdminEditProduct from "./AdminEditProduct";
 
-const AdminProductCard = ({ data }) => {
+const AdminProductCard = ({ data, fetchdata }) => {
 
   const [editProduct, setEditProduct] = useState(false)
 
@@ -17,7 +17,7 @@ const AdminProductCard = ({ data }) => {
 
         {
           editProduct && (
-            <AdminEditProduct productData={data} onClose={() => setEditProduct(false)}/>
+            <AdminEditProduct productData={data} onClose={() => setEditProduct(false)} fetchdata={fetchdata}/>
           )
         }
 

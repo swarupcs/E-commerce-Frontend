@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 const AdminEditProduct = ({
   onClose,
   productData,
+  fetchdata,
 }) => {
 
   const [data, setData] = useState({
@@ -80,8 +81,8 @@ const AdminEditProduct = ({
     e.preventDefault();
     // console.log("data", data);
 
-    const response = await fetch(SummaryApi.uploadProduct.url, {
-      method: SummaryApi.uploadProduct.method,
+    const response = await fetch(SummaryApi.updateProduct.url, {
+      method: SummaryApi.updateProduct.method,
       credentials: 'include',
       headers: {
         "content-type" : "application/json"
@@ -95,6 +96,7 @@ const AdminEditProduct = ({
       toast.success(responseData?.message);
       //after successfully uploaded product close the form
       onClose();
+      fetchdata();
     }
 
     if(responseData.error) {
@@ -245,7 +247,7 @@ const AdminEditProduct = ({
           </textarea>
 
 
-        <button className="px-3 py-2 bg-red-600 text-white mb-10 hover:bg-red-700">Upload Product</button>
+        <button className="px-3 py-2 bg-red-600 text-white mb-10 hover:bg-red-700">Update Product</button>
           
         </form>
         
