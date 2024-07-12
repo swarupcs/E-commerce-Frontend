@@ -17,7 +17,7 @@ const UploadProduct = ({
     productImage: [],
     description: "",
     price: "",
-    selling: "",
+    sellingPrice: "",
 
   })
 
@@ -28,6 +28,15 @@ const UploadProduct = ({
   // const [uploadProductImageInput, setUploadProductImageInput] = useState("");
 
   const handleOnChange = (e) => {
+    const { name, value } = e.target;
+
+    setData((prev) => {
+      return{
+        ...prev,
+        [name] : value
+      }
+
+    })
 
   }
 
@@ -63,6 +72,11 @@ const UploadProduct = ({
 
   }
 
+  // Upload Product
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <div className="fixed w-full  h-full bg-slate-200 bg-opacity-35 top-0 left-0 right-0 bottom-0 flex justify-center items-center">
       
@@ -77,7 +91,7 @@ const UploadProduct = ({
           </div>
         </div>
 
-        <form className="grid p-4 gap-2 overflow-y-scroll h-full pb-5">
+        <form className="grid p-4 gap-2 overflow-y-scroll h-full pb-5" onSubmit={handleSubmit}>
           <label htmlFor="productName">Product Name : </label>
           <input type="text" 
           id="productName"
@@ -99,7 +113,9 @@ const UploadProduct = ({
           />
 
         <label htmlFor="category" className="mt-3">Category : </label>
-        <select value={data.category} className="p-2 bg-slate-100 border rounded">
+        <select value={data.category} name="category" onChange={handleOnChange} className="p-2 bg-slate-100 border rounded">
+        <option value={""}>Select Category</option>
+
           {
             productCategory.map((el, index) => {
               return(
@@ -158,6 +174,37 @@ const UploadProduct = ({
             )
           }
         </div>
+
+          {/* Price */}
+          <label htmlFor="price" className="mt-3">Price : </label>
+          <input 
+            type="number" 
+            id="price"
+            placeholder="enter price"
+            value={data.price}
+            name="price"
+            onChange={handleOnChange}
+            className="p-2 bg-slate-100 border rounded"
+          />
+
+          {/* Selling Price */}
+          <label htmlFor="sellingPrice" className="mt-3">Selling Price : </label>
+          <input 
+            type="number" 
+            id="sellingPrice"
+            placeholder="enter selling price"
+            value={data.sellingPrice}
+            name="sellingPrice"
+            onChange={handleOnChange}
+            className="p-2 bg-slate-100 border rounded"
+          />
+
+          {/* Description */}
+          <label htmlFor="description" className="mt-3">Description : </label>
+          <textarea className="h-28 bg-slate-100 border resize-none p-1" placeholder="enter product description">
+
+          </textarea>
+
 
         <button className="px-3 py-2 bg-red-600 text-white mb-10 hover:bg-red-700">Upload Product</button>
           
