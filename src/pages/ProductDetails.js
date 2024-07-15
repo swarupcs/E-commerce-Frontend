@@ -46,6 +46,10 @@ const ProductDetails = () => {
 
   // console.log("Product Details Data" , data)
 
+  const handleMouseEnterProduct = (imageURL) => {
+    setActiveImage(imageURL);
+  }
+
   return (
     <div className='container mx-auto p-4'>
 
@@ -79,7 +83,7 @@ const ProductDetails = () => {
                       data?.productImage?.map((imgURL, index) => {
                         return(
                           <div className='h-20 w-20 bg-slate-200 rounded p-1' key={imgURL}>
-                            <img src={imgURL} alt="" className='w-full h-full object-scale-down mix-blend-multiply'/>
+                            <img src={imgURL} alt="" className='w-full h-full object-scale-down mix-blend-multiply cursor-pointer' onMouseEnter={()=>handleMouseEnterProduct(imgURL)} onclick={()=>handleMouseEnterProduct(imgURL)}/>
 
                           </div>
                         )
