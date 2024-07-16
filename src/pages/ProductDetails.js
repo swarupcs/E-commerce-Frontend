@@ -4,6 +4,7 @@ import SummaryApi from '../common'
 import { FaStar } from "react-icons/fa";
 import { FaStarHalf } from "react-icons/fa";
 import displayINRCurrency from './../helpers/displayCurrency';
+import CategroyWiseProductDisplay from '../components/CategroyWiseProductDisplay';
 
 const ProductDetails = () => {
 
@@ -205,6 +206,16 @@ const ProductDetails = () => {
         }
 
       </div>
+
+      
+      
+       {
+        data.category && (
+          <CategroyWiseProductDisplay category={data?.category} heading={"Recommended Product"}/>
+        )
+      }
+      
+     
 
     </div>
   )
