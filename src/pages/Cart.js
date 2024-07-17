@@ -91,6 +91,27 @@ const Cart = () => {
         }
     }
 
+    const deleteCartProduct = async(id)=>{
+        const response = await fetch(SummaryApi.deleteCartProduct.url,{
+            method : SummaryApi.deleteCartProduct.method,
+            credentials : 'include',
+            headers : {
+                "content-type" : 'application/json'
+            },
+            body : JSON.stringify(
+                {   
+                    _id : id,
+                }
+            )
+        })
+
+        const responseData = await response.json()
+
+        if(responseData.success){
+            fetchData()
+            context.fetchUserAddToCart()
+        }
+    }
 
     const totalQty = data.reduce((previousValue,currentValue)=> previousValue + currentValue.quantity,0)
     const totalPrice = data.reduce((preve,curr)=> preve + (curr.quantity * curr?.productId?.sellingPrice) ,0)
@@ -126,7 +147,9 @@ const Cart = () => {
                                 </div>
                                 <div className='px-4 py-2 relative'>
                                     {/**delete product */}
-
+                                    <div className='absolute right-0 text-red-600 rounded-full p-2 hover:bg-red-600 hover:text-white cursor-pointer' onClick={()=>deleteCartProduct(product?._id)}>
+                                        <MdDelete/>
+                                    </div>
 
                                     <h2 className='text-lg lg:text-xl text-ellipsis line-clamp-1'>{product?.productId?.productName}</h2>
                                     <p className='capitalize text-slate-500'>{product?.productId.category}</p>
